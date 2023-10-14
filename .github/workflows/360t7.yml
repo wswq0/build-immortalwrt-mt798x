@@ -1,4 +1,4 @@
-name: Build
+name: 3
 
 on:
   repository_dispatch:
@@ -19,7 +19,7 @@ env:
   UPLOAD_OUTPUT: true
 
 jobs:
-   _360t7:
+   build:
     runs-on: ubuntu-20.04
     permissions:
       contents: write
