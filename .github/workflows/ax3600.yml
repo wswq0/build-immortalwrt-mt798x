@@ -13,7 +13,7 @@ env:
   REPO_URL: https://github.com/Boos4721/openwrt
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: .config
+  CONFIG_FILE: ax3600.config
   TZ: Asia/Shanghai
   DEVICE: ax3600
   UPLOAD_OUTPUT: true
@@ -56,6 +56,7 @@ jobs:
         cd openwrt
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+        cp -f $GITHUB_WORKSPACE/$CONFIG_FILE $GITHUB_WORKSPACE/openwrt/.config
 
     - name: 下载依赖
       run: |
