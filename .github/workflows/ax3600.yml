@@ -54,6 +54,7 @@ jobs:
     - name: 配置 Feeds
       run: |
         cd openwrt
+        sed -i 's#https://source.codeaurora.org/quic/qsdk/oss/lklm/shortcut-fe#https://git.codelinaro.org/clo/qsdk/oss/lklm/shortcut-fe.git#g' package/lean/shortcut-fe/simulated-driver/Makefile
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         cp -f $GITHUB_WORKSPACE/$CONFIG_FILE $GITHUB_WORKSPACE/openwrt/.config
