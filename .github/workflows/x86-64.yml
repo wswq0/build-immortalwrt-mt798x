@@ -5,6 +5,8 @@ on:
 jobs:
    build:
     runs-on: ubuntu-latest
+    env: 
+      DEVICE: x86-64
     steps:
     - name: build
       env:
@@ -13,7 +15,9 @@ jobs:
         mkdir bin
         chmod 777 bin
         docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-23.05.0 make image ROOTFS_PARTSIZE="512"
+        ls -ahl bin
         docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-openwrt-23.05 make image ROOTFS_PARTSIZE="512"
+        ls -ahl bin
         echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
     - name: upload
