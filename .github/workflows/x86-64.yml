@@ -10,6 +10,8 @@ jobs:
       env:
           DEBIAN_FRONTEND: noninteractive
       run: |
+        mkdir bin
+        chmod 777 bin
         docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-23.05.0 make image ROOTFS_PARTSIZE="512"
         docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-openwrt-23.05 make image ROOTFS_PARTSIZE="512"
         echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
