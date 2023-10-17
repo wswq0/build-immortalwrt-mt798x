@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       DEVICE: x86-64
+      UPLOAD_OUTPUT: true
+      RELEASE: false
     steps:
     - name: build
       env:
@@ -16,8 +18,8 @@ jobs:
         chmod 777 bin
         docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-23.05.0 make image ROOTFS_PARTSIZE="512"
         ls -ahl bin
-        docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-openwrt-23.05 make image ROOTFS_PARTSIZE="512"
-        ls -ahl bin
+        # docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-openwrt-23.05 make image ROOTFS_PARTSIZE="512"
+        # ls -ahl bin
         echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
     - name: upload
@@ -29,6 +31,7 @@ jobs:
 
     - name: Release
       uses: ncipollo/release-action@v1
+      if: env.RELEASE == 'true' && !cancelled()
       with:
         tag: "${{ env.DEVICE }}--${{ env.FILE_DATE }}"
         artifacts: bin/
