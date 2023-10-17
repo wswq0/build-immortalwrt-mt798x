@@ -18,8 +18,7 @@ jobs:
         chmod 777 bin
         # docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-23.05.0 make image ROOTFS_PARTSIZE="512"
         # ls -ahl bin
-        docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-openwrt-23.05 make info && make image ROOTFS_PARTSIZE="512" PACKAGES="kmod-igbvf -kmod-amazon-ena -kmod-amd-xgbe -kmod-bnx2 -kmod-igc -kmod-ixgbe -kmod-r8169 -kmod-tg3"
-        ls -ahl bin
+        docker run --rm -v "$(pwd)"/bin/:/builder/bin openwrt/imagebuilder:x86-64-openwrt-23.05 make image ROOTFS_PARTSIZE="512" PACKAGES="kmod-igbvf -kmod-amazon-ena -kmod-amd-xgbe -kmod-bnx2 -kmod-igc -kmod-ixgbe -kmod-r8169 -kmod-tg3"
         echo "FILE_DATE=$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
     - name: upload
       uses: actions/upload-artifact@master
