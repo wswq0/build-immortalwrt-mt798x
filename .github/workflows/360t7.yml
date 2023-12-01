@@ -10,7 +10,7 @@ on:
         default: 'false'
         
 env:
-  REPO_URL: https://github.com/Lienol/openwrt
+  REPO_URL: https://github.com/wswq0/openwrt
   REPO_BRANCH: 23.05
   #REPO_BRANCH: openwrt-21.02
   FEEDS_CONF: feeds.conf.default
