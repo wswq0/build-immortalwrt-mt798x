@@ -1,4 +1,4 @@
-name: 360t7
+name: t7
 
 on:
   repository_dispatch:
